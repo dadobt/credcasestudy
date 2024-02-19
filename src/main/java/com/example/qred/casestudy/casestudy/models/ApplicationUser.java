@@ -29,7 +29,8 @@ public class ApplicationUser {
 
     public ApplicationUser() {
     }
-    public ApplicationUser(String username, String encodedPassword,String role) {
+    public ApplicationUser(Long id,String username, String encodedPassword,String role) {
+        this.id=id;
         this.username = username;
         this.password = encodedPassword;
         this.role=role;

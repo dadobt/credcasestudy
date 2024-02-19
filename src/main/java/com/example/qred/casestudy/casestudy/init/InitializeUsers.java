@@ -31,17 +31,19 @@ public class InitializeUsers {
         this.applicationUserRepository = applicationUserRepository;
         this.passwordEncoder = passwordEncoder;
 
+        Long id = 1L;
         String username = "user";
         String password = "password";
         String role = USER;
         String encodedPassword = passwordEncoder.encode(password);
-        applicationUserRepository.save(new ApplicationUser(username, encodedPassword,role));
+        applicationUserRepository.save(new ApplicationUser(id,username, encodedPassword,role));
 
+        Long id2 =2L;
         String username2 = "agent";
         String password2 = "password";
         String role2 = AGENT;
         String encodedPassword2 = passwordEncoder.encode(password2);
-        applicationUserRepository.save(new ApplicationUser(username2, encodedPassword2,role2));
+        applicationUserRepository.save(new ApplicationUser(id2,username2, encodedPassword2,role2));
 
 
        }
