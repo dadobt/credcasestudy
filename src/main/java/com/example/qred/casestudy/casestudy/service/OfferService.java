@@ -77,7 +77,7 @@ public class OfferService {
         return offer;
     }
 
-    private BigDecimal calculateInterestRate(BigDecimal amountApplied) {
+    public static BigDecimal calculateInterestRate(BigDecimal amountApplied) {
         BigDecimal subtract = amountApplied.subtract(BigDecimal.valueOf(MAX_AMOUNT_CREDIT));
         BigDecimal absoluteValueFormSubtract = subtract.abs();
         BigDecimal divide = absoluteValueFormSubtract.divide(BigDecimal.valueOf(MAX_AMOUNT_CREDIT), 2, RoundingMode.CEILING);
@@ -87,12 +87,12 @@ public class OfferService {
         return max;
     }
 
-    private BigDecimal calculateTotalAmount(BigDecimal amountApplied, BigDecimal commission) {
+    public static BigDecimal calculateTotalAmount(BigDecimal amountApplied, BigDecimal commission) {
         BigDecimal totalAmount = amountApplied.add(commission);
         return totalAmount;
     }
 
-    private BigDecimal calculateCommission(BigDecimal amountApplied, BigDecimal interest) {
+    public static BigDecimal calculateCommission(BigDecimal amountApplied, BigDecimal interest) {
         BigDecimal commission = amountApplied.multiply(interest);
         return commission;
     }
