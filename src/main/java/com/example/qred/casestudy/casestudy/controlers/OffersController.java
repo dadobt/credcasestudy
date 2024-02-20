@@ -58,7 +58,7 @@ public class OffersController {
     @RequestMapping(path = "/offers", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getApplications(Authentication authentication) {
         ApplicationUser byUsername = applicationUserRepository.findByUsername(authentication.getName());
-        if (byUsername == null && byUsername.getRole().equalsIgnoreCase(AGENT)) {
+        if (byUsername != null && byUsername.getRole().equalsIgnoreCase(AGENT)) {
             Optional<List<CreditApplication>> allWithStatusPending = creditApplicationService.findAllWithStatusPending();
             if (allWithStatusPending.isEmpty()) {
                 logger.info("There are no more applications with status Pending");

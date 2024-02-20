@@ -80,6 +80,16 @@ public abstract class IntegrationTest {
         return contractRepository.save(contract);
     }
 
+    public CreditApplication createDummyCreditApplication(){
+        CreditApplication creditApplication = new CreditApplication();
+        creditApplication.setAmountApplied(BigDecimal.valueOf(12345));
+        creditApplication.setLoanApplicant("user");
+        creditApplication.setEmail("test@test.com");
+        creditApplication.setOrganizationNumber("11111111-8888");
+        creditApplication.setPhoneNumber("+46701234567");
+        creditApplication.setApplicationStatus(CreditApplicationStatus.PENDING.toString());
+        return creditApplicationRepository.save(creditApplication);
+    }
     public Offer createDummyOfferForUser(){
 
        CreditApplication creditApplication = new CreditApplication();
@@ -121,6 +131,10 @@ public abstract class IntegrationTest {
         return creditApplicationRepository.findAllByLoanApplicant(user);
     }
 
+    public Optional<List<Contract>> findAllContractsByLoanApplicant(String user){
+        return contractRepository.findAllByLoanApplicant(user);
+    }
+
     public AuthenticationRequest createAuthenticateRequest() {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         authenticationRequest.setUsername("user");
@@ -128,8 +142,22 @@ public abstract class IntegrationTest {
         return authenticationRequest;
     }
 
+    public AuthenticationRequest createAuthenticateAgentRequest() {
+        AuthenticationRequest authenticationRequest = new AuthenticationRequest();
+        authenticationRequest.setUsername("agent");
+        authenticationRequest.setPassword("password");
+        return authenticationRequest;
+    }
+
     public String authenticateUser() {
         AuthenticationRequest applicationRequest = createAuthenticateRequest();
+        ResponseEntity<AuthenticationResponse> responseEntity = restTemplate.postForEntity(getBaseUrl() + "/authenticate", applicationRequest, AuthenticationResponse.class);
+        AuthenticationResponse response = responseEntity.getBody();
+        return response.getJwt();
+    }
+
+    public String authenticateAgent() {
+        AuthenticationRequest applicationRequest = createAuthenticateAgentRequest();
         ResponseEntity<AuthenticationResponse> responseEntity = restTemplate.postForEntity(getBaseUrl() + "/authenticate", applicationRequest, AuthenticationResponse.class);
         AuthenticationResponse response = responseEntity.getBody();
         return response.getJwt();
