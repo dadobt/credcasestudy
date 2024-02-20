@@ -1,7 +1,6 @@
 package com.example.qred.casestudy.casestudy.repository;
 
 import com.example.qred.casestudy.casestudy.models.Contract;
-import com.example.qred.casestudy.casestudy.models.Offer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

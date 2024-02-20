@@ -2,7 +2,6 @@ package com.example.qred.casestudy.casestudy.models;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
